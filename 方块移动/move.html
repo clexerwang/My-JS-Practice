@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会移动的方块</title>
+    <style>
+        body{
+            margin:0;padding:0;
+        }
+
+        #chessboard{
+            width:610px;
+            height:610px;
+            border: 3px solid;
+            margin: auto;
+            position: relative;
+        }
+        .blank{
+            width:60px;
+            height:60px;
+            float: left;
+            border-left: 1px solid;
+            border-bottom: 1px solid;
+        }
+        #chess{
+            position: absolute;
+            background-color: #0086b3;
+            width:60px;
+            height:60px;
+            top:0;left:1px;
+            transition: top 0.5s,left 0.5s;
+        }
+        #head{
+            background-color: #795da3;
+            width:60px;
+            height:20px;
+            position: absolute;
+            top:0;
+            left:0
+        }
+
+    </style>
+</head>
+<body>
+    <div id="chessboard">
+        <div id="chess" >
+            <div id="head"></div>
+        </div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+        <div class="blank"></div>
+    </div>
+        <input type="text" >
+        <button>GO!!</button>
+
+<script>
+    window.onload=function() {
+        var chess = document.querySelector('#chess');
+        var input = document.querySelector('input');
+
+        //var form=document.querySelector('form');
+        var button = document.querySelector('button');
+        var chessboard = document.querySelector('#chessboard');
+        var cssSheet = document.styleSheets[0];
+        var cssRules = cssSheet.cssRules;
+        var chessCss = cssRules[3];
+        var time = 0;
+
+        button.addEventListener('click', function (event) {
+            inputValue = input.value.trim().split(' ');
+            switch (inputValue[0]) {
+                case 'TURN':
+                    turn();
+                    break;
+                case 'TRA':
+                    tra();
+                    break;
+                case 'MOV':
+                    turnNow();
+                    break;
+                case 'GO':
+                    go();
+                    break;
+                default:
+                    break;
+            }
+
+        });
+
+        function go() {
+            switch (time) {
+                case 0:
+                    console.log('bbb');
+                    toTop();
+                    break;
+                case 1:
+                    toRight();
+                    break;
+                case 2:
+                    toBottom();
+                    break;
+                case 3:
+                    toLeft();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function turn() {
+            if (inputValue[1] == 'RIGHT') {
+                time++;
+                if (time == 4) {
+                    time = 0;
+                }
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            } else if (inputValue[1] == 'LEFT') {
+                time--;
+                if (time == -1) {
+                    time = 3;
+                }
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            }
+        }
+
+        function turnNow() {
+            if (inputValue[1] == 'RIGHT') {
+                time = 1;
+                toRight();
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            } else if (inputValue[1] == 'LEFT') {
+                time = 3;
+                toLeft();
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            } else if (inputValue[1] == 'TOP') {
+                time = 0;
+                toTop();
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            } else if (inputValue[1] == 'BOTTOM') {
+                time = 2;
+                toBottom();
+                chess.style.transform = `rotate(${90 * time}deg)`;
+            }
+        }
+
+        function toTop() {
+            if (parseInt(chessCss.style.top) > 30) {
+                chessCss.style.top = (parseInt(chessCss.style.top) - 61) + 'px';
+            }
+        }
+
+        function toRight() {
+            if (parseInt(chessCss.style.left) < 510) {
+                chessCss.style.left = (parseInt(chessCss.style.left) + 61) + 'px';
+            }
+        }
+
+        function toBottom() {
+            if (parseInt(chessCss.style.top) < 510) {
+                chessCss.style.top = (parseInt(chessCss.style.top) + 61) + 'px';
+            }
+        }
+
+        function toLeft() {
+            if (parseInt(chessCss.style.left) > 30) {
+                chessCss.style.left = (parseInt(chessCss.style.left) - 61) + 'px';
+            }
+        }
+
+        function tra() {
+            switch (inputValue[1]) {
+                case 'TOP':
+                    toTop();
+                    break;
+                case 'BOTTOM':
+                    toBottom();
+                    break;
+                case 'LEFT':
+                    toLeft();
+                    break;
+                case 'RIGHT':
+                    toRight();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+</script>
+</body>
+</html>
