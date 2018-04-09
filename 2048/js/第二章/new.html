@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="width:500px;height:500px;background-color: gray">
+    <div style="width:450px;height:450px;background-color: aliceblue">
+        <div style="width:400px;height:400px;background-color: antiquewhite">
+            <div style="width:350px;height:350px;background-color: aqua">
+                <div style="width:300px;height:100px;background-color: aquamarine"></div>
+                <div style="width:300px;height:100px;background-color: black"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+/*
+    不管事件的目标元素是什么，事件总是从最外层的window对象开始向下传递，进入捕获阶段
+    当事件到达目标元素，此时开始冒泡阶段，事件又开始层层向上传递，在冒泡阶段，元素对事件就可以做出反应。
+*/
+
+    var odiv=document.querySelectorAll('div');
+    //console.log(odiv.length);
+    for(var i=0;i<odiv.length;i++){
+        odiv[i].onclick=function(num){
+                       return function(){ console.log(num)}
+                    }(i)
+    }
+
+
+
+
+
+
+
+
+
+
+    /*
+    var odiv=document.querySelector('div');
+*/
+
+    /*var cssText=odiv.style.cssText;
+    var length=odiv.style.length;
+    var cssRule=odiv.style.cssRule;
+*/
+/*
+    console.log(odiv.style.getPropertyCSSValue('background'));
+*/
+
+    /*console.log(cssText)
+    console.log(length)
+    console.log(cssRule)*/
+
+    /*var top=document.querySelector('.top');
+    var bottom=document.querySelector('.bottom');
+    var div=document.querySelector('div');
+    top.addEventListener('click',function(){
+        div.scrollIntoView();
+    });
+    bottom.addEventListener('click',function(){
+        div.scrollIntoView(false);
+    })*/
+    /*console.log(document.doctype.publicId);
+    console.log(document.doctype.systemId);
+    console.log(document.doctype.internalSubset);
+console.log(document.defaultView)*/
+
+    /*var docType=document.implementation.createDocumentType("html","-//W3C//DTD XHTML 1.0 Strict //EN","http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd");
+    document.implementation.createDocument("","html",docType);*/
+
+    /*var newNode=document.createElement('p');
+    var otherNode=document.createElement('p');
+    console.log(newNode.isSameNode(otherNode));
+    console.log(newNode.isEqualNode(otherNode));
+    console.log(newNode.isSameNode(newNode));*/
+    //创建节点
+    //  var div=document.createElement('div');
+
+    //var newInput=document.createElement('input');
+
+
+    /*div.setUserData("value","wangyao",function(operation,key,value,source,dest){
+        if(operation==1){
+            dest.setUserData(key,value,function(){});
+        }
+    });
+    var newDiv=div.cloneNode(false);
+    console.log(newDiv.getAttribute("name"));*/
+
+
+
+
+    // document.implementation.createHTMLDocument("new Doc");
+   /* var son=document.querySelector(".b");
+
+    son.classList.add("e");
+
+    son.classList.toggle("c");
+    son.classList.remove('b');
+
+    console.log(son.classList);
+
+    var active=document.activeElement;
+    console.log(active);
+     console.log(document.readyState);
+     if(document.readyState==='complete'){
+         alert('allReady')
+     }*/
+   /*document.getElementsByClassName('b')[0].dataset.one="hasaki";
+   console.log(document.getElementsByClassName('b')[0].dataset)*/
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+body{
+    margin:0;
+    padding:0;
+}
+*{
+    box-sizing: border-box;
+}
+.outer{
+    width:400px;
+    height:400px;
+    border:1px solid;
+    position: relative;
+}
+.grid{
+    width:100px;
+    height:100px;
+    border: 1px solid;
+    position: absolute;
+}
+.chess{
+    text-align: center;
+    line-height: 100px;
+    position: absolute;
+}
