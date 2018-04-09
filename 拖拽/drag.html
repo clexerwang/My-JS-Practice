@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body,html{
+            padding:0;
+            margin:0;
+            width:100%;
+            height:100%;
+        }
+        #outer{
+            height:180px;
+            width:300px;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background-color:#98FB98;
+
+        }
+        #title{
+            height:30px;
+            width:100%;
+            background-color: aqua;
+            cursor: move;
+        }
+        #shadow{
+            display:none;
+            width:100%;
+            height:100%;
+            background-color:rgba(144,144,144,0.5);
+            position:absolute;
+            top:0;
+        }
+        button{
+            width:100px;
+            position: absolute;
+            top:30%;
+            left:50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+
+    <button>点击弹出提示框</button>
+
+    <div id="shadow">
+        <div id="outer">
+            <div id="title"></div>
+        </div>
+    </div>
+<script>
+    var dragArea=document.querySelector('#title');
+    var outer=document.querySelector('#outer');
+    var shadow=document.querySelector("#shadow");
+    var isDown=false;
+    var relateX,relateY;
+    var button=document.querySelector("button");
+    button.addEventListener("click",function(){
+        shadow.style.display="block";
+    });
+    dragArea.addEventListener('mousedown',function(event){
+        button=event.button;
+        isDown=true;
+        //鼠标相对推拽框的位置
+        relateX=event.clientX-outer.offsetLeft;
+        relateY=event.clientY-outer.offsetTop;
+        console.log(outer.offsetLeft)
+    });
+    //新事件发生位置减去元素当前偏移量减去之前的相对位置就是鼠标相对元素的移动量
+    //移动量再加上元素的偏移量就是元素新的偏移量
+    document.body.addEventListener('mousemove',function(event){
+        if(!isDown)return false;
+        newPositionX=event.clientX-relateX;
+        newPositionY=event.clientY-relateY;
+        outer.style.left=newPositionX+'px';
+        outer.style.top=newPositionY+'px';
+    });
+    dragArea.addEventListener('mouseup',()=>{
+        isDown=false;
+    })
+</script>
+</body>
+</html>
