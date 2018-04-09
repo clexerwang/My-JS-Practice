@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单联动</title>
+    <style>
+        input{
+            display:inline-block;
+        }
+        #student{
+            display: block;
+        }
+        #nonstudent{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="radio" name="isstudent" checked>在校生
+        <input type="radio" name="isstudent">非在校生
+        <div id="student">
+            <select name="provice">
+                <option><--请选择--></option>
+            </select>
+            <select name="city">
+                <option><--请选择--></option>
+            </select>
+            <select name="local">
+                <option><--请选择--></option>
+            </select>
+        </div>
+        <div id='nonstudent'>
+            <input type="text">
+        </div>
+    </form>
+    </form>
+<script type="text/javascript" src="mainJs.js">
+</script>
+
+</body>
+</html>
