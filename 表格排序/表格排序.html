@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        tr{
+            height:50px;
+        }
+        td{
+            width:300px;
+            border:1px solid;
+            text-align: center;
+            line-height: 50px;
+        }
+        th{
+            transition: background-color 0.5s;
+        }
+        th:hover{
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var data=[{
+        'Name':'A',
+        'Chinese': 100,
+        'Math':100,
+        'English':70
+    },{
+        'Name':'B',
+        'Chinese': 90,
+        'Math':100,
+        'English':100
+    },
+        {'Name':'C',
+            'Chinese': 90,
+            'Math':80,
+            'English':70},
+        {
+            'Name':'D',
+            'Chinese': 100,
+            'Math':60,
+            'English':70
+        },
+        {
+            'Name':'E',
+            'Chinese': 90,
+            'Math':70,
+            'English':80
+        },
+        {
+            'Name':'F',
+            'Chinese': 100,
+            'Math':90,
+            'English':75
+        },
+        {
+            'Name':'G',
+            'Chinese': 98,
+            'Math':69,
+            'English':70
+        },{
+            'Name':'Z',
+            'Chinese': 15,
+            'Math':100,
+            'English':90
+        }
+        ,
+        {
+            'Name':'H',
+            'Chinese': 100,
+            'Math':77,
+            'English':90
+        },
+        {
+            'Name':'I',
+            'Chinese': 80,
+            'Math':88,
+            'English':78
+        },
+        {
+            'Name':'J',
+            'Chinese': 90,
+            'Math':100,
+            'English':80
+        },
+        {
+            'Name':'K',
+            'Chinese': 90,
+            'Math':90,
+            'English':80
+        },
+        {
+            'Name':'L',
+            'Chinese': 100,
+            'Math':100,
+            'English':70
+        }
+            ];
+    //创建表头
+    function createTH(data){
+        rows=data.length+1;
+        cols=Object.keys(data[0]).length;
+        table=document.createElement("table");
+        //第一行
+        let tr=document.createElement("tr");
+        for(let eve in data[0]){
+            let th=document.createElement("th");
+            th.innerText=eve;
+            tr.appendChild(th);
+        }
+        table.appendChild(tr);
+    }
+    //创建表格
+    function createTable(data){
+        //之后的行
+        for(let i=0;i<rows-1;i++){
+            let tr=document.createElement("tr");
+            for(let eve in data[i]){
+                let td=document.createElement("td");
+                td.innerText=data[i][eve];
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        document.body.appendChild(table);
+    }
+    //将数据存入数组
+    function allDataInArr(){
+        var allData=Array(rows-1);
+        for(var i=0;i<allData.length;i++){
+            allData[i]=Array(3);
+        }
+        //3行
+        for(let i=0;i<data.length;i++){
+            //每个对象4个属性
+            for(let j=0;j<4;j++){
+                allData[i][j]=data[i][Object.keys(data[0])[j]]
+            }
+        }
+        return allData;
+    }
+    //根据内容排序
+    function allTitle(){
+        var allTitleTds=document.querySelectorAll("tr th");
+        for(let i=1;i<allTitleTds.length;i++){
+            allTitleTds[i].onclick=function(){
+                sort(i)
+            };
+        }
+    }
+    function sort(num){
+        dataInArr.sort(function(a,b){
+            if(a[num]>=b[num]){
+                return -1;
+            }else{
+                return 1
+            }
+        });
+        console.log(dataInArr);
+        var allTR=document.querySelectorAll("tr");
+        for(let i=1;i<allTR.length;i++){
+            var allTD=allTR[i].querySelectorAll("td");
+            for(var j=0;j<allTD.length;j++){
+                allTD[j].innerText=dataInArr[i-1][j]
+            }
+        }
+    }
+
+
+    createTH(data);
+    createTable(data);
+    var dataInArr=allDataInArr();
+    allTitle();
+
+
+</script>
+</body>
+</html>
